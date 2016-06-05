@@ -7,14 +7,19 @@ var rd = readline.createInterface({
     terminal: false
 });
 
-rd.on('line', function(line) {
-    var output = bigger(line);
-    console.log(output);
-    fs.appendFileSync("./output.txt", output + "\n");
-});
+// rd.on('line', function(line) {
+//     var output = bigger(line);
+//     console.log(output);
+//     fs.appendFileSync("./output.txt", output + "\n");
+// });
 //console.log(bigger('rebjvsszebhehuojrkkhszxltyqfdvayusylgmgkdivzlpmmtvbsavxvydldmsym'));
+// console.log(bigger('gwakhcpkolybihkmxyecrdhsvycjrljajlmlqgpcnmvvkjlkvdowzdfikh'));
+// ['ab','bb','hefg','dhck','dkhc','abdc'].forEach(function(item){
+//     console.log(`------------------------------${bigger(item)}`);
+//});
+
+//console.log(sameWord('dkhc'));
 //console.log(bigger('hefg'));
-//console.log('bb');
 
 function processData(input) {
     var inputs = input.split('\n');
@@ -26,54 +31,31 @@ function processData(input) {
 } 
 
 function bigger(word){
-    if (word.length === 1) return word;
-    
-    var letters = word.split('');
-    var last = letters.length-1;
-
-    var biggerThanFirstIndex = -1;
-
-    for (var index = last - 1; index >= 0 ; index--){
-        //console.log(`letters[index] = ${letters[index]} index = ${index}`);
-        if (letters[index] < letters[last]) {
-            //swap
-            var temp = letters[index];
-            letters[index] = letters[last];
-            letters[last] = temp;
-            //console.log(`index = ${index} letters = ${letters}`);
-
-            //sort
-            var front = letters.slice(0,index+1).join('');
-            var back = letters.slice(index+1, letters.length).sort().join('');
-
-            //console.log(`front = ${front} back =${back}`);
-
-            return front + back;
-
-        } else if (letters[index] === letters[last]) {
-            var front = letters.slice(0,index+1).join('');
-            var back = letters.slice(index+1, letters.length).join('');            
-            var tempBack = bigger(back);
-
-            //console.log(`front = ${front} back =${back} tempBack=${tempBack}`);
-
-            return front + tempBack;            
-
-        } else {
-            if (letters[index] > letters[0] && biggerThanFirstIndex<0) {
-                biggerThanFirstIndex = index; 
+    var found = false;
+    for (var i = word.length -1 ; i >=0 ; i--){
+        var letter = word.charAt(i);
+        for (var j = word.length -1 ; j >= i ; j--){
+            var moving = word.charAt(j);
+            //console.log(`letter[i] = ${word.charAt(i)} letter[j] = ${word.charAt(j)}`);
+            if (moving > letter){
+                found=true
+                break;    
             }
+            
         }
+        if (found) break;
     }
+    if (i === -1 && j === -1) {
+        return "no answer";
+    } else {
+        var letters = word.split('');
+        var temp = letters[i];
+        letters[i] = letters[j];
+        letters[j] = temp;
+        var front = letters.splice(0,i+1).join('');
+        var back = letters.sort().join('');
+        return front + back;
+    }
+    //console.log(`letter[i] = ${word.charAt(i)}(${i}) letter[j] = ${word.charAt(j)}(${j})`);
 
-    //console.log(`biggerThanFirstIndex = ${biggerThanFirstIndex}`);
-
-    var temp = letters[0];
-    letters[0] = letters[biggerThanFirstIndex];
-    letters[biggerThanFirstIndex] = temp;
-
-    var front = letters.slice(0,1).join('');
-    var back = letters.slice(1, letters.length).sort().join('');
-
-    return front+back;
 }
