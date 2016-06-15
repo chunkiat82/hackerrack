@@ -1,0 +1,22 @@
+{
+  "name": "hackerrack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chunkiat82/hackerrack.git"
+  },
+  "author": "Raymond Ho <rayho@paypal.com> (http://github.paypal.com/rayho)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chunkiat82/hackerrack/issues"
+  },
+  "homepage": "https://github.com/chunkiat82/hackerrack#readme",
+  "dependencies": {
+    "json_prune": "^1.0.0"
+  }
+}
