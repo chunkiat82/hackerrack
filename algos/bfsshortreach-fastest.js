@@ -16,10 +16,10 @@ function processData1(input) {
     // var edges = ['1 2','3 2','4 3','5 4'];
     // var startPoint = 2;
     //
-    var noOfNodes = 446;
-    var noOfEdges = 30338;
-    var edges = file; //['1 2','2 3', '3 4', '4 5'];
-    var startPoint = 274;
+    // var noOfNodes = 446;
+    // var noOfEdges = 30338;
+    // var edges = file; //['1 2','2 3', '3 4', '4 5'];
+    // var startPoint = 274;
 
     var nodes = createTree(noOfNodes, edges);
 
@@ -32,16 +32,15 @@ function processData1(input) {
 function processData(input) {
     var inputs = input.split(require('os').EOL);
     var testCases = Number(inputs.shift());
-    for (var i =0;i<testCases;i++){
-        var nodesEdges = inputs.shift().split(' ').map(Number);
-        var noOfNodes = nodesEdges[0];
-        var noOfEdges = nodesEdges[1];
+    var i = 0;
+    for (var tc =0;tc<testCases;tc++){
+        const [noOfNodes, noOfEdges] = inputs[i++].split(' ').map(Number);
         var edges = [];
         for (var j =0;j<noOfEdges;j++){
-            edges.push(inputs.shift());
+            edges.push(inputs[i++]);
         }
 
-        var startPoint = Number(inputs.shift());
+        var startPoint = Number(inputs[i++]);
 
         var nodes = createTree(noOfNodes, edges);
 
