@@ -1,6 +1,6 @@
 var file = require('./in.js');
 
-function processData(input) {
+function processData1(input) {
     var noOfNodes = 4;
     var noOfEdges = 2;
     var edges = ['1 2','1 3'];
@@ -29,6 +29,29 @@ function processData(input) {
 
 }
 
+function processData(input) {
+    var inputs = input.split(require('os').EOL);
+    var testCases = Number(inputs.shift());
+    for (var i =0;i<testCases;i++){
+        var nodesEdges = inputs.shift().split(' ').map(Number);
+        var noOfNodes = nodesEdges[0];
+        var noOfEdges = nodesEdges[1];
+        var edges = [];
+        for (var j =0;j<noOfEdges;j++){
+            edges.push(inputs.shift());
+        }
+
+        var startPoint = Number(inputs.shift());
+
+        var nodes = createTree(noOfNodes, edges);
+
+        calculateDistances(nodes, startPoint);
+
+        display(nodes, startPoint);
+    }
+
+}
+
 function calculateDistances(nodes, startPoint) {
 
     var nodesToVisit = [startPoint];
@@ -45,7 +68,7 @@ function calculateDistances(nodes, startPoint) {
         }
 
         for (let nodeKey of nodesToVisit) {
-            var currentNode = nodes[nodeKey];            
+            var currentNode = nodes[nodeKey];
             for (let linkKey in currentNode.links) {
                 if (!nodes[linkKey].visited) {
                     nextNodesToVisit.push(Number(linkKey));
@@ -59,7 +82,7 @@ function calculateDistances(nodes, startPoint) {
 }
 
 function display(nodes, startPoint) {
-    var output = '';
+
     const ranges = [];
 
     for (var i = 1; i < nodes.length; i++) {
@@ -94,4 +117,4 @@ function createTree(noOfNodes, edges) {
 
 }
 
-processData('x');
+processData1('x');
